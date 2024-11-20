@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Form</title>
+    <link href="./bootstrap-5.3.3-dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: black;
+            height: 100vh;
+        }
+        #main {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        #border {
+            border: 2px solid #333;
+            border-radius: 10px;
+            padding: 30px;
+            background-color: #fff;
+            width: 100%;
+            max-width: 400px;
+        }
+        #center {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .form-control {
+            padding: 15px;
+            font-size: 16px;
+            border-radius: 8px;
+        }
+        .links {
+            display: flex;
+            justify-content: space-between;
+        }
+        .links a {
+            text-decoration: none;
+            font-size: 14px;
+            color: #007bff;
+        }
+        .btn-custom {
+            width: 100%;
+            padding: 12px;
+            background-color: black;
+            color: white;
+            border-radius: 20px;
+        }
+        .links a:hover {
+            text-decoration: underline;
+        }
+        h3 {
+            font-size: 30px;
+            font-weight: bold;
+            text-align: center;
+            color: #333;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="main">
+        <div id="border">
+            <form id="center">
+                <h3>Login</h3>
+                <input type="email" id="email" placeholder="Enter your email" class="form-control" required>
+                <input type="password" id="password" placeholder="Enter your password" class="form-control" required>
+                <div class="links">
+                    <a href="./forgotpassword.html">Forgot your password?</a>
+                    <a href="./signup.html">Sign Up!</a>
+                </div>
+                <input type="submit" class="btn-custom mt-3" value="Login">
+            </form>
+            <div class="footer">
+                <small>&copy; 2024 YourCompany. All rights reserved.</small>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.querySelector("form").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            let email = document.getElementById("email").value;
+            let password = document.getElementById("password").value;
+
+            let users = JSON.parse(localStorage.getItem("users")) || [];
+            let user = users.find(u => u.email === email && u.password === password);
+
+            if (user) {
+                alert("Login successful!");
+                localStorage.setItem("loggedInUser", JSON.stringify(user)); 
+                window.location.href = "index.html"; 
+            } else {
+                alert("Invalid email or password. Please try again.");
+            }
+        });
+    </script>
+</body>
+</html>
